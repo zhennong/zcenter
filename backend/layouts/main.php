@@ -462,7 +462,6 @@ CommonAsset::register($this);
                                 Back End Framework
                                 <span class="label label-primary pull-right">68%</span>
                             </h4>
-
                             <div class="progress progress-xxs">
                                 <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
                             </div>

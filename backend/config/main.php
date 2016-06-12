@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
 
     'defaultRoute' => 'user/site/index',
-    'layoutPath' => 'backend\layouts',
+    'layoutPath' => 'backend/layouts',
     'layout' => 'main',
 
     'bootstrap' => ['log'],
@@ -21,6 +21,9 @@ return [
         ],
         'user' => [
             'class' => 'backend\modules\user\module',
+        ],
+        'menu' => [
+            'class' => 'backend\modules\menu\module',
         ],
         'members' => [
             'class' => 'backend\modules\members\members',
