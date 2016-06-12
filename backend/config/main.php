@@ -22,6 +22,9 @@ return [
         'user' => [
             'class' => 'backend\modules\user\module',
         ],
+        'members' => [
+            'class' => 'backend\modules\members\members',
+        ],
     ],
     'components' => [
         'assetManager' => [
