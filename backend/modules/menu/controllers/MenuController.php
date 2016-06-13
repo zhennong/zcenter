@@ -70,7 +70,7 @@ class MenuController extends Controller
     {
         $model     = new MenuModel();
         $wireless  = new WirelessModel();
-        $wire      = $wireless->option();
+        $wire      = $wireless->gets();
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid =intval(Yii::$app->request->post()['parentid']);

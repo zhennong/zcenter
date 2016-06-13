@@ -15,7 +15,8 @@ use yii\widgets\ActiveForm;
     <select class="form-control" name="parentid">
         <option value=0 selected="selected">作为一级菜单</option>
         <?php foreach ($wire as $w){?>
-        <?=$w;}?>
+            <option value="<?=$w['id']?>"><?=$w['prefix'].$w['name']?></option>
+        <?php }?>
     </select>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>

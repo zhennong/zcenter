@@ -9,7 +9,11 @@ use backend\modules\menu\models\MenuModel;
 
 class WirelessModel extends \yii\db\ActiveRecord{
 
-    public $cart = [];
+    public $cart   = [];
+    //前缀样式符
+    public $left   = "&nbsp;";
+    public $center = " │ &nbsp;&nbsp;&nbsp;";
+    public $right  = " ├─ &nbsp;";
 
     public  function __construct()
     {
@@ -18,15 +22,24 @@ class WirelessModel extends \yii\db\ActiveRecord{
     }
 
     /**
-     * 递归取出菜单
+     * 下拉菜单
      * @param  $pd父级id，默认为0, $lv为层级值，同级值相等;
      * @return array 排好顺序的二位数组;
      */
-    public function gets($pd=0,$lv=1){
+    public function gets($pd=0,$lv=0){
         $data = [];
         foreach ($this->cart as $c){
             if ($c['parentid'] == $pd){
-                $c['lv'] = $lv;
+                $c['lv']     = $lv;
+                if ($c['lv']>0){
+                    if ($c['lv'] -1 >0){
+                        $c['prefix'] = $this->left.str_repeat($this->center,$c['lv']-1).$this->right;
+                    }else{
+                        $c['prefix'] = $this->left.$this->right;
+                    }
+                }else{
+                    $c['prefix'] = "";
+                }
                 $data[]  = $c;
                 $data = array_merge($data,$this->gets($c['id'],$lv+1));
             }
@@ -35,25 +48,18 @@ class WirelessModel extends \yii\db\ActiveRecord{
     }
 
     /**
-     * 下拉菜单样式
+     * 首页菜单样式
      */
-    public function option(){
-        $css = [];
-        $data = $this->gets();
-        foreach ($data as $d){
-            if($d['lv'] == 1){
-                $css[] = "<option value={$d['id']}>{$d['name']}</option>";
-            }else if ($d['lv'] ==2 ){
-                $css[] = "<option value={$d['id']}>&nbsp; ├─ &nbsp;{$d['name']}</option>";
-            }else if ($d['lv'] ==3 ){
-                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; ├─ &nbsp; {$d['name']}</option>";
-            }else if ($d['lv'] ==4 ){
-                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; ├─  &nbsp;{$d['name']}</option>";
-            }else if ($d['lv'] ==5 ){
-                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; ├─ &nbsp;{$d['name']}</option>";
+    public function cindex($pd=0,$lv=0){
+        $data = [];
+        foreach ($this->cart as $c){
+            if ($c['parentid'] == $pd){
+                $c['lv']     = $lv;
+                $data[]  = $c;
+                $data = array_merge($data,$this->gets($c['id'],$lv+1));
             }
         }
-        return $css;
+        return $data;
     }
 
 
