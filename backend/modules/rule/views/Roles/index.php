@@ -10,21 +10,18 @@ use yii\grid\GridView;
 $this->title = '角色管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="box box-success col-md-11">
     <p class="box-footer clearfix">
         <?= Html::a('添加角色', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+//        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'roleid',
             'rolename',
             'description',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-</div>

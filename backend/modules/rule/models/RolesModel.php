@@ -38,9 +38,8 @@ class RolesModel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'roleid' => 'Roleid',
-            'rolename' => 'Rolename',
-            'description' => 'Description',
+            'rolename' => '角色组名称',
+            'description' => '角色组描述',
         ];
     }
 }

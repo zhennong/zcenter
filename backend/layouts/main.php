@@ -236,7 +236,9 @@ CommonAsset::register($this);
             ]) ?>
         </section>
         <section class="content clearfix">
-            <?= $content ?>
+            <div class="box box-success col-md-11">
+                <?= $content ?>
+            </div>
         </section>
     </div>
     <!-- /.content-wrapper -->
