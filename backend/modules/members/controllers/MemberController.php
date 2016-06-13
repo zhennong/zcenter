@@ -121,4 +121,24 @@ class MemberController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * transfer old member to new app
+     */
+    public function actionTest()
+    {
+//        self::transferMember();
+    }
+
+    public static function transferMember()
+    {
+//        $sql = "SELECT username, password, mobile, regtime, edittime, logintime FROM {{%member}} AS member LEFT JOIN {{%finance_trade}} AS trade ON ";
+        /*$sql = "SELECT x.mobile, x.total FROM (SELECT mobile, count(*) AS total FROM {{%member}} GROUP BY mobile) AS x WHERE x.total > 1 AND x.mobile <> ''";
+        $members = Yii::$app->db_nongyao001->createCommand($sql)->query();
+        var_dump(count($members));
+        echo "<pre>";
+        foreach($members as $k => $v){
+            var_dump($v);
+        }*/
+    }
 }
