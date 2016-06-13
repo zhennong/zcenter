@@ -34,5 +34,28 @@ class WirelessModel extends \yii\db\ActiveRecord{
         return $data;
     }
 
+    /**
+     * 下拉菜单样式
+     */
+    public function option(){
+        $css = [];
+        $data = $this->gets();
+        foreach ($data as $d){
+            if($d['lv'] == 1){
+                $css[] = "<option value={$d['id']}>{$d['name']}</option>";
+            }else if ($d['lv'] ==2 ){
+                $css[] = "<option value={$d['id']}>&nbsp; ├─ &nbsp;{$d['name']}</option>";
+            }else if ($d['lv'] ==3 ){
+                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; ├─ &nbsp; {$d['name']}</option>";
+            }else if ($d['lv'] ==4 ){
+                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; ├─  &nbsp;{$d['name']}</option>";
+            }else if ($d['lv'] ==5 ){
+                $css[] = "<option value={$d['id']}>&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; │ &nbsp;&nbsp;&nbsp; ├─ &nbsp;{$d['name']}</option>";
+            }
+        }
+        return $css;
+    }
+
+
 
 }
