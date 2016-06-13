@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\rule\models\RuleSearchModel */
+/* @var $model backend\modules\menu\models\MenuSearchModel */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="rule-model-search">
+<div class="menu-model-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,16 +17,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'permission') ?>
-
     <?= $form->field($model, 'name') ?>
-
-    <?= $form->field($model, 'router') ?>
 
     <?= $form->field($model, 'appid') ?>
 
+    <?= $form->field($model, 'parentid') ?>
+
+    <?= $form->field($model, 'router') ?>
+
+    <?php // echo $form->field($model, 'listorder') ?>
+
+    <?php // echo $form->field($model, 'display') ?>
+
     <div class="form-group">
-        <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
     </div>
 

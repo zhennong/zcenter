@@ -1,18 +1,19 @@
 <?php
 
-namespace backend\modules\members\controllers;
+namespace backend\modules\menu\controllers;
 
 use Yii;
-use backend\modules\members\models\destoon\Member;
-use backend\modules\members\models\destoon\SearchMember;
+use backend\modules\menu\models\MenuModel;
+use backend\modules\menu\models\MenuSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\modules\menu\models\WirelessModel;
 
 /**
- * MemberController implements the CRUD actions for Member model.
+ * MenuController implements the CRUD actions for MenuModel model.
  */
-class MemberController extends Controller
+class MenuController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,23 +31,28 @@ class MemberController extends Controller
     }
 
     /**
-     * Lists all Member models.
+     * Lists all MenuModel models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SearchMember();
+        $searchModel = new MenuSearchModel();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+//        $cs = new WirelessModel();
+//        $cs1 = $cs->gets();
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+//            'dataProvider' => $cs1,
         ]);
     }
 
     /**
-     * Displays a single Member model.
-     * @param string $id
+     * Displays a single MenuModel model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -57,35 +63,44 @@ class MemberController extends Controller
     }
 
     /**
-     * Creates a new Member model.
+     * Creates a new MenuModel model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Member();
+        $model     = new MenuModel();
+        $wireless  = new WirelessModel();
+        $wire      = $wireless->gets();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->userid]);
-        } else {
+        if ($model->load(Yii::$app->request->post())){
+            $model->parentid =intval(Yii::$app->request->post()['parentid']);
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }else {
             return $this->render('create', [
                 'model' => $model,
+                'wire'  => $wire,
             ]);
         }
     }
 
     /**
-     * Updates an existing Member model.
+     * Updates an existing MenuModel model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->userid]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->parentid = intval(Yii::$app->request->post()['parentid']);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -94,9 +109,9 @@ class MemberController extends Controller
     }
 
     /**
-     * Deletes an existing Member model.
+     * Deletes an existing MenuModel model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -107,15 +122,15 @@ class MemberController extends Controller
     }
 
     /**
-     * Finds the Member model based on its primary key value.
+     * Finds the MenuModel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Member the loaded model
+     * @param integer $id
+     * @return MenuModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Member::findOne($id)) !== null) {
+        if (($model = MenuModel::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

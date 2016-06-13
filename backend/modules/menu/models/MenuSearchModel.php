@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\rule\models;
+namespace backend\modules\menu\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\rule\models\RuleModel;
+use backend\modules\menu\models\MenuModel;
 
 /**
- * RuleSearchModel represents the model behind the search form about `backend\modules\rule\models\RuleModel`.
+ * MenuSearchModel represents the model behind the search form about `backend\modules\menu\models\MenuModel`.
  */
-class RuleSearchModel extends RuleModel
+class MenuSearchModel extends MenuModel
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class RuleSearchModel extends RuleModel
     public function rules()
     {
         return [
-            [['id', 'permission', 'appid'], 'integer'],
+            [['id', 'appid', 'parentid', 'listorder', 'display'], 'integer'],
             [['name', 'router'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class RuleSearchModel extends RuleModel
      */
     public function search($params)
     {
-        $query = RuleModel::find();
+        $query = MenuModel::find();
 
         // add conditions that should always apply here
 
@@ -60,8 +60,10 @@ class RuleSearchModel extends RuleModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'permission' => $this->permission,
             'appid' => $this->appid,
+            'parentid' => $this->parentid,
+            'listorder' => $this->listorder,
+            'display' => $this->display,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

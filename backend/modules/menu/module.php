@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\rule;
+namespace backend\modules\menu;
 
 /**
- * rule module definition class
+ * modules module definition class
  */
 class module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'backend\modules\rule\controllers';
+    public $controllerNamespace = 'backend\modules\menu\controllers';
 
     /**
      * @inheritdoc

@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\rule\models\RuleModel */
+/* @var $model backend\modules\menu\models\MenuModel */
 
-$this->title = 'Update Rule Model: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Rule Models', 'url' => ['index']];
+$this->title = 'Update Menu Model: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Menu Models', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="rule-model-update">
+<div class="menu-model-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

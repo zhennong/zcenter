@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\rule\models\RuleModel */
+/* @var $model backend\modules\menu\models\MenuModel */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Rule Models', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Menu Models', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="rule-model-view">
+<div class="menu-model-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -23,16 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a('Index',['index'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'permission',
             'name',
-            'router',
             'appid',
+            'parentid',
+            'router',
+            'listorder',
+            'display',
         ],
     ]) ?>
 
