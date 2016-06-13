@@ -41,12 +41,11 @@ class MenuController extends Controller
 
 //        $cs = new WirelessModel();
 //        $cs1 = $cs->gets();
-
+//        var_dump($cs1);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-//            'dataProvider' => $cs1,
         ]);
     }
 
@@ -71,7 +70,7 @@ class MenuController extends Controller
     {
         $model     = new MenuModel();
         $wireless  = new WirelessModel();
-        $wire      = $wireless->gets();
+        $wire      = $wireless->option();
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid =intval(Yii::$app->request->post()['parentid']);
@@ -95,6 +94,8 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $wireless  = new WirelessModel();
+        $wire      = $wireless->gets();
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid = intval(Yii::$app->request->post()['parentid']);
@@ -104,6 +105,7 @@ class MenuController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'wire'  => $wire,
             ]);
         }
     }
