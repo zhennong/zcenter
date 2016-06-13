@@ -11,18 +11,19 @@ use yii\widgets\ActiveForm;
 <div class="menu-model-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?php $css='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'?>
 
     <select class="form-control" name="parentid">
         <option value="" selected="selected">请选择父级菜单</option>
         <option style="padding-left: 20px;" value=0>顶级菜单</option>
         <?php foreach ($wire as $w){?>
             <?php if($w['lv'] == 1){?>
-                <option style="padding-left: 30px;" value=<?=$w['id']?>>
-                    ┠ &nbsp;&nbsp;<?=$w['name']?>
+                <option value=<?=$w['id']?>>
+                    <?=$css?>┠ &nbsp;&nbsp;<?=$w['name']?>
                 </option>
             <?php }else{?>
-                <option style="padding-left: <?=($w['lv']*30).'px'?>;" value=<?=$w['id']?>>
-                    └ &nbsp;&nbsp;<?=$w['name']?>
+                <option value=<?=$w['id']?>>
+                    <?=str_repeat($css,$w['lv'])?>└ &nbsp;&nbsp;<?=$w['name']?>
                 </option>
             <?php }?>
         <?php }?>
