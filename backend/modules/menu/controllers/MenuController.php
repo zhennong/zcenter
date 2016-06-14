@@ -8,7 +8,6 @@ use backend\modules\menu\models\MenuSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use backend\modules\menu\models\WirelessModel;
 
 /**
  * MenuController implements the CRUD actions for MenuModel model.
@@ -39,11 +38,12 @@ class MenuController extends Controller
         $searchModel = new MenuSearchModel();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $wireless = new WirelessModel();
-        $wire     = $wireless->option();
-
+        $model = new MenuModel();
+        $wire  = $model->option();
         return $this->render('index', [
-            'wire' => $wire,
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+              'wire' => $wire,
         ]);
     }
 
@@ -67,8 +67,7 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model     = new MenuModel();
-        $wireless  = new WirelessModel();
-        $wire      = $wireless->option();
+        $wire      = $model->option();
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid =intval(Yii::$app->request->post()['parentid']);
@@ -92,8 +91,7 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $wireless  = new WirelessModel();
-        $wire      = $wireless->option();
+        $wire      = $model->option();
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid = intval(Yii::$app->request->post()['parentid']);

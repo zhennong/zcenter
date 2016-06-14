@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $searchModel backend\modules\menu\models\MenuSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Menu Models';
+$this->title = '菜单管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-model-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Menu Model', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建菜单', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <table class="table table-hover">
         <thead >
