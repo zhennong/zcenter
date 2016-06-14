@@ -11,9 +11,11 @@ use yii\widgets\ActiveForm;
 <div class="menu-model-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
+    <label class="control-label" for="menumodel-name"><?=Yii::t('common','Parent Menu')?></label>
     <select class="form-control" name="parentid">
-        <option value=0 selected="selected">作为一级菜单</option>
+        <?php if(!isset($pid)){?>
+            <option value=0><?=Yii::t('common','As First Menu')?></option>
+        <?php }?>
         <?php foreach ($wire as $w){?>
             <option value="<?=$w['id']?>"><?=$w['prefix'].$w['name']?></option>
         <?php }?>

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\menu\models\MenuModel */
 
-$this->title = 'Update Menu Model: ' . $model->name;
+$this->title = Yii::t('common','Update Menu Model') .':'. $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Menu Models', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'wire'  => $wire,
     ]) ?>
 
 </div>

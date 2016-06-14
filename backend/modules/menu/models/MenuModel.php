@@ -44,16 +44,16 @@ class MenuModel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'appid' => 'Appid',
-            'parentid' => 'Parentid',
-            'router' => 'Router',
-            'listorder' => 'Listorder',
-            'display' => 'Display',
+            'id'        => Yii::t('common','ID'),
+            'name'      => Yii::t('common','Menu Name'),
+            'appid'     => Yii::t('common','Appid'),
+            'parentid'  => Yii::t('common','Parentid'),
+            'router'    => Yii::t('common','Router'),
+            'listorder' => Yii::t('common','Listorder'),
+            'display'   => Yii::t('common','Display'),
         ];
     }
-    
+
 
 
 }
