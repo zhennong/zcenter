@@ -18,21 +18,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Menu Model', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'appid',
-            'parentid',
-            'router',
-            'listorder',
-            'display',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <table class="table table-hover">
+        <thead >
+            <tr>
+                <td>菜单ID</td>
+                <td>菜单名称</td>
+                <td>菜单路由</td>
+                <td>操作菜单</td>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($wire as $w){?>
+            <tr>
+                <td><?=$w['id']?></td>
+                <td><?=$w['prefix'].$w['name']?></td>
+                <td><?=$w['router']?></td>
+                <td>
+                    <a href="#" class="btn btn-link">添加子菜单</a>|
+                    <a href="#" class="btn btn-link">修改</a>|
+                    <a href="#" class="btn btn-link">删除</a>
+                </td>
+            </tr>
+        <?php }?>
+        </tbody>
+        <tfoot>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tfoot>
+    </table>
 </div>

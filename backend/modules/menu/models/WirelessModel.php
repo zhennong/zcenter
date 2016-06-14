@@ -4,12 +4,12 @@ namespace backend\modules\menu\models;
 use backend\modules\menu\models\MenuModel;
 
 /**
- * 无线及分类
+ * 无线及分类菜单
  */
 
 class WirelessModel extends \yii\db\ActiveRecord{
 
-    public $cart   = [];
+    public $cat   = [];
     //前缀样式符
     public $left   = "&nbsp;";
     public $center = " │ &nbsp;&nbsp;&nbsp;";
@@ -18,7 +18,7 @@ class WirelessModel extends \yii\db\ActiveRecord{
     public  function __construct()
     {
         parent::__construct();
-        $this->cart = MenuModel::find()->asArray()->all();
+        $this->cat = MenuModel::find()->orderBy('parentid,listorder')->asArray()->all();
     }
 
     /**
@@ -26,9 +26,9 @@ class WirelessModel extends \yii\db\ActiveRecord{
      * @param  $pd父级id，默认为0, $lv为层级值，同级值相等;
      * @return array 排好顺序的二位数组;
      */
-    public function gets($pd=0,$lv=0){
+    public function option($pd=0,$lv=0){
         $data = [];
-        foreach ($this->cart as $c){
+        foreach ($this->cat as $c){
             if ($c['parentid'] == $pd){
                 $c['lv']     = $lv;
                 if ($c['lv']>0){
@@ -41,7 +41,7 @@ class WirelessModel extends \yii\db\ActiveRecord{
                     $c['prefix'] = "";
                 }
                 $data[]  = $c;
-                $data = array_merge($data,$this->gets($c['id'],$lv+1));
+                $data = array_merge($data,$this->option($c['id'],$lv+1));
             }
         }
         return $data;
