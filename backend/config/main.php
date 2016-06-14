@@ -2,6 +2,7 @@
 $params = array_merge(
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
+    
 );
 
 return [
@@ -65,6 +66,18 @@ return [
             ],
         ],
         */
+        'i18n' => [
+            'translations' => [
+                'common' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => 'common/messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'common' => 'common.php',
+                    ],
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

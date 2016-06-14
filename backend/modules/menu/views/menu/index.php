@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\menu\models\MenuSearchModel */
@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <table class="table table-hover">
         <thead >
             <tr>
-                <td>菜单ID</td>
-                <td>菜单名称</td>
-                <td>菜单路由</td>
-                <td>操作菜单</td>
+                <td><?=Yii::t('common','Menu ID')?></td>
+                <td><?=Yii::t('common','Menu Name')?></td>
+                <td><?=Yii::t('common','Router')?></td>
+                <td><?=Yii::t('common','Menu Operation')?></td>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?=$w['prefix'].$w['name']?></td>
                 <td><?=$w['router']?></td>
                 <td>
-                    <a href="#" class="btn btn-link">添加子菜单</a>|
-                    <a href="#" class="btn btn-link">修改</a>|
-                    <a href="#" class="btn btn-link">删除</a>
+                    <a href="<?=Url::to(['menu/update','id'=>$w['id']])?>" class="btn btn-link">添加子菜单</a>|
+                    <a href="<?=Url::to(['menu/update','id'=>$w['id']])?>" class="btn btn-link">修改</a>|
+                    <a href="<?=Url::to(['menu/delete','id'=>$w['id']])?>" class="btn btn-link">删除</a>
                 </td>
             </tr>
         <?php }?>
