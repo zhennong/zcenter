@@ -35,15 +35,15 @@ class MenuController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MenuSearchModel();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//        $searchModel = new MenuSearchModel();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $model = new MenuModel();
-        $wire  = $model->option();
+        $cats  = $model->option();
+//        $dataProvider = $model->cat;
         return $this->render('index', [
-//            'searchModel' => $searchModel,
 //            'dataProvider' => $dataProvider,
-              'wire' => $wire,
+              'cats' => $cats,
         ]);
     }
 
@@ -67,7 +67,15 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model     = new MenuModel();
-        $wire      = $model->option();
+        $cats      = $model->option();
+        $pid       = null;
+        $aid       = null;
+        //获取地址参数id的值
+        $id        = Yii::$app->getRequest()->getQueryParam('id');
+        if ($id){
+            $pid = $id;
+            $aid = $model->findOne($id)->appid;
+        }
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid =intval(Yii::$app->request->post()['parentid']);
@@ -77,7 +85,9 @@ class MenuController extends Controller
         }else {
             return $this->render('create', [
                 'model' => $model,
-                'wire'  => $wire,
+                'cats'  => $cats,
+                'pid'   => $pid,
+                'aid'   => $aid,
             ]);
         }
     }
@@ -91,7 +101,8 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $wire      = $model->option();
+        $cats  = $model->option();
+        $pid   = $model->parentid;
 
         if ($model->load(Yii::$app->request->post())){
             $model->parentid = intval(Yii::$app->request->post()['parentid']);
@@ -101,7 +112,8 @@ class MenuController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'wire'  => $wire,
+                'cats'  => $cats,
+                'pid'   => $pid,
             ]);
         }
     }

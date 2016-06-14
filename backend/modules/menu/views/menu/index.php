@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\menu\models\MenuSearchModel */
@@ -28,24 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($wire as $w){?>
+        <?php foreach ($cats as $w){?>
             <tr>
                 <td><?=$w['id']?></td>
                 <td><?=$w['prefix'].$w['name']?></td>
                 <td><?=$w['router']?></td>
                 <td>
-                    <a href="<?=Url::to(['menu/update','id'=>$w['id']])?>" class="btn btn-link">添加子菜单</a>|
-                    <a href="<?=Url::to(['menu/update','id'=>$w['id']])?>" class="btn btn-link">修改</a>|
-                    <a href="<?=Url::to(['menu/delete','id'=>$w['id']])?>" class="btn btn-link">删除</a>
+                    <?= Html::a('添加子菜单', ['menu/create','id'=>$w['id']],['class' => 'btn btn-link']);?>|
+                    <?= Html::a('修改', ['menu/update','id'=>$w['id']],['class' => 'btn btn-link']);?>|
+                    <?= Html::a('删除', ['menu/delete','id'=>$w['id']],['class' => 'btn btn-link', 'data-method'=>'post']);?>
                 </td>
             </tr>
         <?php }?>
         </tbody>
-        <tfoot>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tfoot>
     </table>
 </div>
