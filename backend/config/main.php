@@ -16,6 +16,9 @@ return [
 
     'bootstrap' => ['log'],
     'modules' => [
+        'app' => [
+            'class' => 'backend\modules\app\module',
+        ],
         'rule' => [
             'class' => 'backend\modules\rule\module',
         ],
