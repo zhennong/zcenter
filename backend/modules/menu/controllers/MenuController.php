@@ -126,6 +126,14 @@ class MenuController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->request->isAjax){
+             $id = intval($id);
+            if($this->findModel($id)->delete()){
+                return 'ok';
+            }else{
+                return 'no';
+            }
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

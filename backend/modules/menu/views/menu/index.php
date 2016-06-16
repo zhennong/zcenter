@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\menu\models\MenuSearchModel */
@@ -35,10 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td>
                     <?= Html::a('添加子菜单', ['menu/create','id'=>$w['id']],['class' => 'btn btn-link']);?>|
                     <?= Html::a('修改', ['menu/update','id'=>$w['id']],['class' => 'btn btn-link']);?>|
-                    <?= Html::a('删除', ['menu/delete','id'=>$w['id']],['class' => 'btn btn-link', 'data-method'=>'post']);?>
+                    <a class="btn btn-link" onclick="del(<?=$w['id']?>)">删除</a>
+                    <input type="hidden" id="url" value="<?=Url::toRoute(['/menu/menu/delete'])?>">
+                    <input type="hidden" id="token" value="<?=Yii::$app->request->csrfToken?>">
                 </td>
             </tr>
         <?php }?>
+        <?=Html::jsFile('backend/web/js/menu/delete.js')?>
         </tbody>
     </table>
 </div>
+
