@@ -17,6 +17,12 @@ return [
 
     'bootstrap' => ['log'],
     'modules' => [
+        'api' => [
+            'class' => 'backend\modules\api\Module',
+            'modules' => [
+                'v1' => 'backend\modules\api\v1\Module'
+            ]
+        ],
         'app' => [
             'class' => 'backend\modules\app\module',
         ],
@@ -58,26 +64,15 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        /*
+
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+//            'enablePrettyUrl' => true,
+//            'showScriptName' => false,
             'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/tree'],
             ],
         ],
-        */
-        'i18n' => [
-            'translations' => [
-                'common' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => 'common/messages',
-                    'sourceLanguage' => 'en',
-                    'fileMap' => [
-                        'common' => 'common.php',
-                    ],
-                ],
-            ],
-        ],
+
     ],
     'params' => $params,
 ];
