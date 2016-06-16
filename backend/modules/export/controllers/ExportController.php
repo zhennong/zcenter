@@ -48,11 +48,4 @@ class ExportController extends Controller
         }
         return $this->render('index');
     }
-    public function actionTest(){
-        if($_POST )
-        {
-            $array = $_POST['checkbox'];
-            dump($array);
-        }
-    }
 }
