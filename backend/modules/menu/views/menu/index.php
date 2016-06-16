@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <table class="table table-hover">
         <thead >
             <tr>
-                <td><?=Yii::t('common','Menu ID')?></td>
-                <td><?=Yii::t('common','Menu Name')?></td>
-                <td><?=Yii::t('common','Router')?></td>
-                <td><?=Yii::t('common','Menu Operation')?></td>
+                <td>菜单ID</td>
+                <td>菜单名称</td>
+                <td>路由</td>
+                <td>菜单操作</td>
             </tr>
         </thead>
         <tbody>

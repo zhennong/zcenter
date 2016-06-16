@@ -8,6 +8,7 @@ use backend\modules\menu\models\MenuSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\TreeList;
 
 /**
  * MenuController implements the CRUD actions for MenuModel model.
@@ -39,8 +40,8 @@ class MenuController extends Controller
 //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $model = new MenuModel();
-        $cats  = $model->option();
-//        $dataProvider = $model->cat;
+        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats  = TreeList::getNews($data)->csList();
         return $this->render('index', [
 //            'dataProvider' => $dataProvider,
               'cats' => $cats,
@@ -67,7 +68,8 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model     = new MenuModel();
-        $cats      = $model->option();
+        $data      = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats      = TreeList::getNews($data)->csList();
         $pid       = null;
         $aid       = null;
         //获取地址参数id的值
@@ -101,7 +103,8 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $cats  = $model->option();
+        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats  = TreeList::getNews($data)->csList();
         $pid   = $model->parentid;
 
         if ($model->load(Yii::$app->request->post())){
@@ -154,4 +157,5 @@ class MenuController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
