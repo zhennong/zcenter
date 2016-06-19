@@ -1,16 +1,16 @@
 <?php
 
-namespace backend\modules\menu;
+namespace backend\modules\export;
 
 /**
- * modules module definition class
+ * export module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'backend\modules\menu\controllers';
+    public $controllerNamespace = 'backend\modules\export\controllers';
 
     /**
      * @inheritdoc

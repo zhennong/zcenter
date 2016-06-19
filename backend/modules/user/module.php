@@ -5,7 +5,7 @@ namespace backend\modules\user;
 /**
  * user module definition class
  */
-class module extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc
@@ -17,7 +17,6 @@ class module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
         // custom initialization code goes here
     }
 }

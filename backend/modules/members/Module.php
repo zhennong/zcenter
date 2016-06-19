@@ -5,7 +5,7 @@ namespace backend\modules\members;
 /**
  * members module definition class
  */
-class members extends \yii\base\Module
+class Module extends \yii\base\Module
 {
     /**
      * @inheritdoc

@@ -8,6 +8,7 @@ use backend\modules\menu\models\MenuSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\TreeList;
 
 /**
  * MenuController implements the CRUD actions for MenuModel model.
@@ -39,8 +40,8 @@ class MenuController extends Controller
 //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $model = new MenuModel();
-        $cats  = $model->option();
-//        $dataProvider = $model->cat;
+        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats  = TreeList::getNews($data)->csList();
         return $this->render('index', [
 //            'dataProvider' => $dataProvider,
               'cats' => $cats,
@@ -67,10 +68,11 @@ class MenuController extends Controller
     public function actionCreate()
     {
         $model     = new MenuModel();
-        $cats      = $model->option();
+        $data      = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats      = TreeList::getNews($data)->csList();
         $pid       = null;
         $aid       = null;
-        //获取地址参数id的值
+        //如果是创建子菜单的话，获取地址参数id的值
         $id        = Yii::$app->getRequest()->getQueryParam('id');
         if ($id){
             $pid = $id;
@@ -101,7 +103,8 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $cats  = $model->option();
+        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
+        $cats  = TreeList::getNews($data)->csList();
         $pid   = $model->parentid;
 
         if ($model->load(Yii::$app->request->post())){
@@ -154,4 +157,21 @@ class MenuController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * 节点查询
+     * @param $id,按栏目id查下面的数据 ,$did,默认值为1 = 显示的数据
+     * @return array
+     */
+    public function actionGetList($id , $did=1){
+        $model  = new MenuModel();
+        $one    = $model->find()->where(['id'=>$id])->asArray()->one();
+        $cats[] = $one;
+        $data   = $model->find()->where(['appid'=>1,'display'=>$did])->orderBy('parentid,listorder')->asArray()->all();
+        $cats   = array_merge($cats,TreeList::getNews($data)->arList($id));
+        return $cats;
+    }
+
+
+
 }
