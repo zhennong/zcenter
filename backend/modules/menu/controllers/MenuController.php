@@ -72,7 +72,7 @@ class MenuController extends Controller
         $cats      = TreeList::getNews($data)->csList();
         $pid       = null;
         $aid       = null;
-        //获取地址参数id的值
+        //如果是创建子菜单的话，获取地址参数id的值
         $id        = Yii::$app->getRequest()->getQueryParam('id');
         if ($id){
             $pid = $id;
@@ -157,5 +157,21 @@ class MenuController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * 节点查询
+     * @param $id,按栏目id查下面的数据 ,$did,默认值为1 = 显示的数据
+     * @return array
+     */
+    public function actionGetList($id , $did=1){
+        $model  = new MenuModel();
+        $one    = $model->find()->where(['id'=>$id])->asArray()->one();
+        $cats[] = $one;
+        $data   = $model->find()->where(['appid'=>1,'display'=>$did])->orderBy('parentid,listorder')->asArray()->all();
+        $cats   = array_merge($cats,TreeList::getNews($data)->arList($id));
+        return $cats;
+    }
+
+
 
 }
