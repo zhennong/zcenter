@@ -18,16 +18,16 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'rule' => [
-            'class' => 'backend\modules\rule\module',
+            'class' => 'backend\modules\rule\Module',
         ],
         'user' => [
-            'class' => 'backend\modules\user\module',
+            'class' => 'backend\modules\user\Module',
         ],
         'menu' => [
-            'class' => 'backend\modules\menu\module',
+            'class' => 'backend\modules\menu\Module',
         ],
         'members' => [
-            'class' => 'backend\modules\members\members',
+            'class' => 'backend\modules\members\Module',
         ],
     ],
     'components' => [
