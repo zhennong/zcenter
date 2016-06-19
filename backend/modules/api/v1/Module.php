@@ -11,5 +11,7 @@ class Module extends \backend\modules\api\Module
     public function init()
     {
         parent::init();
+        Yii::$app->user->enableSession = false;
+        Yii::$app->user->loginUrl = null;
     }
 }
