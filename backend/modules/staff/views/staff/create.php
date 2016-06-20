@@ -1,6 +1,6 @@
 <?php
 
-use kartik\helpers\Html;
+use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
