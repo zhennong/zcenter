@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\helpers\Html;
+use kartik\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model backend\modules\staff\models\Staff */
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->dropDownList([\backend\modules\staff\models\Staff::STATUS_DELETED=>'delete', \backend\modules\staff\models\Staff::STATUS_ACTIVE=>'active']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

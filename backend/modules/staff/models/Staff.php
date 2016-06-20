@@ -55,10 +55,8 @@ class Staff extends \yii\db\ActiveRecord
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
-            ['auth_key', 'required'],
             ['auth_key', 'string', 'max' => 32],
 
-            ['password_hash', 'required'],
             ['password_hash', 'string', 'max' => 255],
 
             ['password_reset_token', 'unique'],
@@ -68,7 +66,9 @@ class Staff extends \yii\db\ActiveRecord
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
-            ['password', 'compare', 'compareAttribute'=>'repassword'],
+
+            ['repassword', 'required'],
+            ['repassword', 'compare', 'compareAttribute'=>'password'],
 
             ['status', 'required'],
             ['status', 'integer'],
@@ -90,13 +90,14 @@ class Staff extends \yii\db\ActiveRecord
         ];
     }
 
-    public function beforeValidate()
+    public function beforeSave($insert)
     {
-        /*if(parent::beforeValidate()){
-            $this->auth_key = 'dafsdfasdf';
+        if(parent::beforeSave($insert)){
+            $this->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+            $this->auth_key = Yii::$app->security->generateRandomString();
             return true;
         }else{
             return false;
-        }*/
+        }
     }
 }
