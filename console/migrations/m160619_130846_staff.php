@@ -2,8 +2,10 @@
 
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m160619_130846_staff extends Migration
 {
+    private $_tableName = '{{%staff}}';
+
     public function up()
     {
         $tableOptions = null;
@@ -12,15 +14,17 @@ class m130524_201442_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%user}}', [
+        $this->createTable($this->_tableName, [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
+            'truename' => $this->string()->notNull(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
+            'email' => $this->string()->notNull()->defaultValue(''),
+            'role'=>$this->string(),
 
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
+            'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
@@ -28,6 +32,17 @@ class m130524_201442_init extends Migration
 
     public function down()
     {
-        $this->dropTable('{{%user}}');
+        $this->dropTable($this->_tableName);
     }
+
+    /*
+    // Use safeUp/safeDown to run migration code within a transaction
+    public function safeUp()
+    {
+    }
+
+    public function safeDown()
+    {
+    }
+    */
 }
