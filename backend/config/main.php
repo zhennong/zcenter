@@ -38,6 +38,10 @@ return [
         'members' => [
             'class' => 'backend\modules\members\Module',
         ],
+        // 工作人员 add by wodrow
+        'staff' => [
+            'class' => 'backend\modules\staff\Module',
+        ],
     ],
     'components' => [
         'assetManager' => [
