@@ -161,15 +161,21 @@ class MenuController extends Controller
     /**
      * 节点查询
      * @param $id,按栏目id查下面的数据 ,$did,默认值为1 = 显示的数据
-     * @return array
+     * @return array 返回排好序的显示的数组;
+     * @throws NotFoundHttpException 已经隐藏或者找不到,
      */
     public function actionGetList($id , $did=1){
+        echo "<pre>";
         $model  = new MenuModel();
-        $one    = $model->find()->where(['id'=>$id])->asArray()->one();
-        $cats[] = $one;
-        $data   = $model->find()->where(['appid'=>1,'display'=>$did])->orderBy('parentid,listorder')->asArray()->all();
-        $cats   = array_merge($cats,TreeList::getNews($data)->arList($id));
-        return $cats;
+        $one    = $model->find()->where(['id'=>$id,'display'=>$did])->asArray()->one();
+        if ($one){
+            $cats[] = $one;
+            $data   = $model->find()->where(['appid'=>$one['appid'],'display'=>$did])->orderBy('parentid,listorder')->asArray()->all();
+            $cats   = array_merge($cats,TreeList::getNews($data)->arList($id));
+            return $cats;
+        }else{
+            throw new NotFoundHttpException('抱歉，找不到任何数据');
+        }
     }
 
 
