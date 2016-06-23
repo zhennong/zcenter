@@ -87,6 +87,8 @@ class Staff extends \yii\db\ActiveRecord
             'email' => '邮箱',
             'role' => '角色',
             'status' => '状态',
+            'created_at' => '创建时间',
+            'updated_at' => '修改时间',
         ];
     }
 

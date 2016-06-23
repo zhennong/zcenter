@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td>菜单ID</td>
                 <td>菜单名称</td>
                 <td>路由</td>
+                <td>应用ID</td>
+                <td>排序值</td>
                 <td>菜单操作</td>
             </tr>
         </thead>
@@ -33,6 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?=$w['id']?></td>
                 <td><?=$w['prefix'].$w['name']?></td>
                 <td><?=$w['router']?></td>
+                <td><?=$w['appid']?></td>
+                <td><?=$w['listorder']?></td>
                 <td>
                     <?= Html::a('添加子菜单', ['menu/create','id'=>$w['id']],['class' => 'btn btn-link']);?>|
                     <?= Html::a('修改', ['menu/update','id'=>$w['id']],['class' => 'btn btn-link']);?>|
