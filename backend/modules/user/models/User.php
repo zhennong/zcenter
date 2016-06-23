@@ -4,7 +4,7 @@ namespace backend\modules\user\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
+use yii\db\ActiveRecordZcenter;
 use yii\web\IdentityInterface;
 
 /**
@@ -20,12 +20,15 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property string $access_token
+ * @property integer $access_token_at
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecordZcenter implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+//        return \Yii::$app->db2;
 
     /**
      * @inheritdoc
