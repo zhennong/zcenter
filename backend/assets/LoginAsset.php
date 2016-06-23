@@ -13,8 +13,8 @@ class LoginAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'backend/web/css/bootstrap.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
+        'https://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css',
+        'https://cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css',
         'backend/web/css/AdminLTE.min.css',
         'backend/web/css/blue.css'
     ];

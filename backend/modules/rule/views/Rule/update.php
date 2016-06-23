@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Update Rule Model: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Rule Models', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'roleid' => $model->roleid]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="rule-model-update">

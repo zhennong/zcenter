@@ -15,11 +15,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'permission') ?>
-
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'roleid') ?>
 
     <?= $form->field($model, 'router') ?>
 

@@ -18,8 +18,8 @@ class RuleSearchModel extends RuleModel
     public function rules()
     {
         return [
-            [['id', 'permission', 'appid'], 'integer'],
-            [['name', 'router'], 'safe'],
+            [['roleid', 'appid'], 'integer'],
+            [['router'], 'safe'],
         ];
     }
 
@@ -59,13 +59,11 @@ class RuleSearchModel extends RuleModel
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'permission' => $this->permission,
+            'roleid' => $this->id,
             'appid' => $this->appid,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'router', $this->router]);
+        $query->andFilterWhere(['like', 'router', $this->router]);
 
         return $dataProvider;
     }

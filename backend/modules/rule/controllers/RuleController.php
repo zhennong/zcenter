@@ -36,6 +36,7 @@ class RuleController extends Controller
     public function actionIndex()
     {
         $searchModel = new RuleSearchModel();
+        var_dump($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -46,13 +47,13 @@ class RuleController extends Controller
 
     /**
      * Displays a single RuleModel model.
-     * @param string $id
+     * @param string $roleid
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($roleid)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($roleid),
         ]);
     }
 
@@ -66,7 +67,7 @@ class RuleController extends Controller
         $model = new RuleModel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'roleid' => $model->roleid]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,15 +78,15 @@ class RuleController extends Controller
     /**
      * Updates an existing RuleModel model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param string $roleid
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($roleid)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($roleid);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'roleid' => $model->roleid]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,12 +97,12 @@ class RuleController extends Controller
     /**
      * Deletes an existing RuleModel model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param string $roleid
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($roleid)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($roleid)->delete();
 
         return $this->redirect(['index']);
     }
@@ -109,13 +110,13 @@ class RuleController extends Controller
     /**
      * Finds the RuleModel model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param string $roleid
      * @return RuleModel the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($roleid)
     {
-        if (($model = RuleModel::findOne($id)) !== null) {
+        if (($model = RuleModel::findOne($roleid)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

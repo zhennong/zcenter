@@ -7,9 +7,7 @@ use Yii;
 /**
  * This is the model class for table "zn_rule_rule".
  *
- * @property string $id
- * @property integer $permission
- * @property string $name
+ * @property string $roleid
  * @property string $router
  * @property integer $appid
  */
@@ -29,9 +27,8 @@ class RuleModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['permission', 'appid'], 'required'],
-            [['permission', 'appid'], 'integer'],
-            [['name'], 'string', 'max' => 30],
+            [['appid'], 'required'],
+            [['appid'], 'integer'],
             [['router'], 'string', 'max' => 50],
         ];
     }
@@ -42,9 +39,7 @@ class RuleModel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'permission' => '规则状态',
-            'name' => '规则名称',
+            'roleid' => 'ID',
             'router' => '路由URL',
             'appid' => '应用ID',
         ];
