@@ -165,7 +165,6 @@ class MenuController extends Controller
      * @throws NotFoundHttpException 已经隐藏或者找不到,
      */
     public function actionGetList($id , $did=1){
-        echo "<pre>";
         $model  = new MenuModel();
         $one    = $model->find()->where(['id'=>$id,'display'=>$did])->asArray()->one();
         if ($one){

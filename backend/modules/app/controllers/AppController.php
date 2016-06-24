@@ -121,4 +121,19 @@ class AppController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * AJAX请求 生成随机长度的字符串
+     * @return string;
+     */
+    public function actionRandStr(){
+        if(Yii::$app->request->isAjax){
+            $str = '1234567890abcdefjhjkmnopqrstuvwxyzABCDEFJHJKLMNOPQRSTUVWXYX';
+            $int = mt_rand(32,40);
+            $str = substr(str_shuffle($str),0,$int);
+            return $str;
+        }else{
+            return 'no';
+        }
+    }
 }

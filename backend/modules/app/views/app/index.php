@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'appuri',
             'app_authuri',
             'description',
+            'appauthkey',
 
             [
                 'class' => 'yii\grid\ActionColumn',

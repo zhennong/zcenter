@@ -12,6 +12,7 @@ use Yii;
  * @property string $appuri
  * @property string $app_authuri
  * @property string $description
+ * @property string $appauthkey
  */
 class AppModel extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,9 @@ class AppModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['appauthkey'], 'required'],
             [['appname'], 'string', 'max' => 50],
+            [['appauthkey'],'string','max'=> 40],
             [['appuri', 'description'], 'string', 'max' => 100],
             [['app_authuri'], 'string', 'max' => 255],
         ];
@@ -46,6 +49,7 @@ class AppModel extends \yii\db\ActiveRecord
             'appuri' => '应用地址',
             'app_authuri' => '应用接口地址',
             'description' => '应用描述',
+            'appauthkey'  => '随机密钥',
         ];
     }
 }
