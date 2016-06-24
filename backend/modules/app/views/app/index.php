@@ -26,8 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'app_authuri',
             'description',
             'appauthkey',
-
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',
