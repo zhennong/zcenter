@@ -73,7 +73,7 @@ class MenuController extends Controller
         $pid       = null;
         $aid       = null;
         //如果是创建子菜单的话，获取地址参数id的值
-        $id        = Yii::$app->getRequest()->getQueryParam('id');
+        $id = Yii::$app->request->get('id');
         if ($id){
             $pid = $id;
             $aid = $model->findOne($id)->appid;
@@ -177,6 +177,22 @@ class MenuController extends Controller
         }
     }
 
+    /**
+     * 排序值修改
+     */
+    public function actionDescs(){
+        if (Yii::$app->request->isAjax){
+            $data = (Yii::$app->request->post()['datas']);
+            foreach ($data as $k => $v){
+                $menu = $this->findModel($k);
+                $menu->listorder = $v;
+                if(!$menu->save()){
+                    return '出错';
+                }
+            }
+            return 'ok';
+        }
+    }
 
 
 }

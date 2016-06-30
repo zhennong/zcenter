@@ -24,6 +24,7 @@ class CommonAsset extends AssetBundle
         'backend/web/js/plugins/fastclick.js',
         'backend/web/js/dist/app.min.js',
         'backend/web/js/dist/demo.js',
+        'backend/web/js/menu/delete.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
