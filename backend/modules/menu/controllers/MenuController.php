@@ -5,6 +5,8 @@ namespace backend\modules\menu\controllers;
 use Yii;
 use backend\modules\menu\models\MenuModel;
 use backend\modules\menu\models\MenuSearchModel;
+use yii\data\ActiveDataProvider;
+use backend\modules\app\models\AppModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,21 +33,31 @@ class MenuController extends Controller
     }
 
     /**
-     * Lists all MenuModel models.
+     * 应用列表
+     */
+    public function actionIndex(){
+        $dataProvider = new ActiveDataProvider([
+            'query' => AppModel::find(),
+        ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * 应用菜单列表
+     * @param integer $aid 应用Id
      * @return mixed
      */
-    public function actionIndex()
-    {
-//        $searchModel = new MenuSearchModel();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    public function actionMenus($aid){
 
-        $model = new MenuModel();
-        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
-        $cats  = TreeList::getNews($data)->csList();
-        return $this->render('index', [
-//            'dataProvider' => $dataProvider,
-              'cats' => $cats,
-        ]);
+        if(!empty($aid)){
+            $data = MenuModel::find()->where(['appid'=>$aid])->orderBy('parentid,listorder')->asArray()->all();
+            $cats  = TreeList::getNews($data)->csList();
+            return $this->render('menus', [
+                'cats' => $cats,
+            ]);
+        }
     }
 
     /**
@@ -73,7 +85,7 @@ class MenuController extends Controller
         $pid       = null;
         $aid       = null;
         //如果是创建子菜单的话，获取地址参数id的值
-        $id        = Yii::$app->getRequest()->getQueryParam('id');
+        $id = Yii::$app->request->get('id');
         if ($id){
             $pid = $id;
             $aid = $model->findOne($id)->appid;
@@ -165,7 +177,6 @@ class MenuController extends Controller
      * @throws NotFoundHttpException 已经隐藏或者找不到,
      */
     public function actionGetList($id , $did=1){
-        echo "<pre>";
         $model  = new MenuModel();
         $one    = $model->find()->where(['id'=>$id,'display'=>$did])->asArray()->one();
         if ($one){
@@ -178,6 +189,22 @@ class MenuController extends Controller
         }
     }
 
+    /**
+     * 排序值修改
+     */
+    public function actionDescs(){
+        if (Yii::$app->request->isAjax){
+            $data = (Yii::$app->request->post()['datas']);
+            foreach ($data as $k => $v){
+                $menu = $this->findModel($k);
+                $menu->listorder = $v;
+                if(!$menu->save()){
+                    return '出错';
+                }
+            }
+            return 'ok';
+        }
+    }
 
 
 }

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\menu\models\MenuModel */
 
-$this->title = Yii::t('common','Create Menu Model');
+$this->title = '创建菜单';
 $this->params['breadcrumbs'][] = ['label' => 'Menu Models', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

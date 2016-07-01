@@ -1,7 +1,10 @@
+var url = $("#url").val();
+var des = $("#descs").val();
+var token = $("#token").val();
+
+//删除ajax
 function del(data) {
     if (confirm('确认要删除' + data + '号菜单嘛？')) {
-        var url = $("#url").val();
-        var token = $("#token").val();
         $.ajax({
             type: 'POST',
             url: url+'&id='+ data,
@@ -18,3 +21,32 @@ function del(data) {
         });
     }
 }
+
+//记录排序值的修改
+var data = {};
+$(".tests").on('input',function(){
+    var k = $(this).prop("name");
+    var v = $(this).val();
+    data[k] = v;
+});
+
+//刷新按钮触发
+$("#refresh").click(function(){
+    $.ajax({
+        type: 'POST',
+        url: des,
+        data: {
+            '_csrf': token,
+            'datas': data
+        },
+        success: function (response) {
+            console.log(response);
+            data = {};
+            if (response == 'ok') {
+                window.location.reload();
+            } else {
+                alert('刷新失败');
+            }
+        }
+    });
+})

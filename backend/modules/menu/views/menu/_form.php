@@ -11,9 +11,9 @@ use yii\widgets\ActiveForm;
 <div class="menu-model-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <label class="control-label" for="menumodel-name"><?=Yii::t('common','Parent Menu')?></label>
+    <label class="control-label" for="menumodel-name">父级菜单</label>
     <select class="form-control" name="parentid">
-        <option value=0><?=Yii::t('common','As First Menu')?></option>
+        <option value=0>作为顶级菜单</option>
 
         <?php foreach ($cats as $w){?>
             <?php if($w['id'] == $pid){?>
@@ -33,8 +33,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'router')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'listorder')->textInput()?>
 
     <?= $form->field($model, 'display')->radioList(['1' => '显示','0' => '隐藏']) ?>
 
