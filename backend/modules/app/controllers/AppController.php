@@ -5,14 +5,14 @@ namespace backend\modules\app\controllers;
 use Yii;
 use backend\modules\app\models\AppModel;
 use yii\data\ActiveDataProvider;
-use yii\web\Controller;
+use common\base\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * AppController implements the CRUD actions for AppModel model.
  */
-class AppController extends Controller
+class AppController extends BackController
 {
     /**
      * @inheritdoc
@@ -28,6 +28,7 @@ class AppController extends Controller
             ],
         ];
     }
+
 
     /**
      * Lists all AppModel models.

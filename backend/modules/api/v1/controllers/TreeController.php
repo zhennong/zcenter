@@ -5,10 +5,20 @@ namespace backend\modules\api\v1\controllers;
 use backend\modules\rule\models\RolesModel;
 use yii\data\ActiveDataProvider;
 use yii\rest\ActiveController;
+use yii\filters\auth\HttpBearerAuth;
 
 class TreeController extends ActiveController
 {
     public $modelClass = 'backend\modules\rule\models\RolesModel';
+
+    public function behaviors()
+    {
+        return [
+            'bearerAuth' => [
+                'class' => HttpBearerAuth::className(),
+            ],
+        ];
+    }
 
     public function actions()
     {
@@ -29,21 +39,13 @@ class TreeController extends ActiveController
     }
     public function actionTest()
     {
-//        $dataProvider = RolesModel::find()->all();
-//        return $dataProvider;//MenuModel::findOne(1);
-        return new ActiveDataProvider(array(
-            'query' => RolesModel::find()
-        ));
+        $dataProvider = RolesModel::find()->all();
+        return 123;//MenuModel::findOne(1);
+//        return new ActiveDataProvider(array(
+//            'query' => RolesModel::find()
+//        ));
     }
-    /**
-     * @return ActiveDataProvider
-     */
-    public function prepareDataProvider()
-    {
-        return new ActiveDataProvider(array(
-            'query' => RolesModel::findOne(1)
-        ));
-    }
+
     /**
      * @param $id
      * @return null|static

@@ -14,6 +14,7 @@ return [
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
+            'loginUrl' => 'site/login',
             'enableAutoLogin' => true,
         ],
         'log' => [
