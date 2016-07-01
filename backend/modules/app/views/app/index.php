@@ -20,12 +20,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'appname',
             'appuri',
             'app_authuri',
             'description',
             'appauthkey',
+            [
+                'label'=>'菜单目录',
+                'format'=>'raw',
+                'value' => function(){
+                    $url = "";
+                    return Html::a('查看', ['app/menus' ,'id'=>1], ['class' => 'btn btn-success btn-sm']);
+                }
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => '操作',

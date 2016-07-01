@@ -5,6 +5,8 @@ namespace backend\modules\menu\controllers;
 use Yii;
 use backend\modules\menu\models\MenuModel;
 use backend\modules\menu\models\MenuSearchModel;
+use yii\data\ActiveDataProvider;
+use backend\modules\app\models\AppModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,21 +33,31 @@ class MenuController extends Controller
     }
 
     /**
-     * Lists all MenuModel models.
+     * 应用列表
+     */
+    public function actionIndex(){
+        $dataProvider = new ActiveDataProvider([
+            'query' => AppModel::find(),
+        ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * 应用菜单列表
+     * @param integer $aid 应用Id
      * @return mixed
      */
-    public function actionIndex()
-    {
-//        $searchModel = new MenuSearchModel();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    public function actionMenus($aid){
 
-        $model = new MenuModel();
-        $data  = $model->find()->orderBy('parentid,listorder')->asArray()->all();
-        $cats  = TreeList::getNews($data)->csList();
-        return $this->render('index', [
-//            'dataProvider' => $dataProvider,
-              'cats' => $cats,
-        ]);
+        if(!empty($aid)){
+            $data = MenuModel::find()->where(['appid'=>$aid])->orderBy('parentid,listorder')->asArray()->all();
+            $cats  = TreeList::getNews($data)->csList();
+            return $this->render('menus', [
+                'cats' => $cats,
+            ]);
+        }
     }
 
     /**

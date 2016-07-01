@@ -1,58 +1,37 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\bootstrap\BaseHtml;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\menu\models\MenuSearchModel */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '菜单管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="menu-model-index">
+<div class="app-model-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('创建菜单', ['create'], ['class' => 'btn btn-success']) ?>
-        <button class="btn btn-success" id="refresh">刷新排序</button>
-        注: 修改排序值以后,点击刷新才能生效
-    </p>
-    <table class="table table-hover">
-        <thead >
-            <tr>
-                <th>排序值</th>
-                <th>菜单ID</th>
-                <th>菜单名称</th>
-                <th>路由</th>
-                <th>应用名称</th>
-                <th>菜单操作</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($cats as $w){?>
-            <tr>
-                <td>
-                    <input type="text" class='tests' name='<?=$w['id']?>' style="width: 30px; text-align: center;" value="<?=$w['listorder']?>">
-                </td>
-                <td><?=$w['id']?></td>
-                <td><?=$w['prefix'].$w['name']?></td>
-                <td><?=$w['router']?></td>
-                <td><?=$w['appid']?></td>
-                <td>
-                    <?= Html::a('添加子菜单', ['menu/create','id'=>$w['id']],['class' => 'btn btn-link']);?>|
-                    <?= Html::a('修改', ['menu/update','id'=>$w['id']],['class' => 'btn btn-link']);?>|
-                    <a class="btn btn-link" onclick="del(<?=$w['id']?>)">删除</a>
-                    <input type="hidden" id="url" value="<?=Url::toRoute(['/menu/menu/delete'])?>">
-                    <input type="hidden" id="descs" value="<?=Url::toRoute(['/menu/menu/descs'])?>">
-                    <input type="hidden" id="token" value="<?=Yii::$app->request->csrfToken?>">
-                </td>
-            </tr>
-        <?php }?>
-        </tbody>
-    </table>
+    <h1>应用列表</h1>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            'appname',
+            'appuri',
+            'app_authuri',
+            'description',
+            [
+                'label'=>'菜单目录',
+                'format'=>'raw',
+                'value' => function($data){
+                    return Html::a('查看', ['menu/menus','aid'=>$data->id], ['class' => 'btn btn-success btn-sm']);
+                }
+            ],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//                'header' => '操作',
+//            ],
+        ],
+    ]); ?>
 </div>
-

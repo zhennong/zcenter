@@ -133,7 +133,14 @@ class AppController extends Controller
             $str = substr(str_shuffle($str),0,$int);
             return $str;
         }else{
-            return 'no';
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * 应用对应的菜单列表
+     */
+    public function actionMenus(){
+        echo 'ok';
     }
 }

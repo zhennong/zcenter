@@ -34,8 +34,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'router')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'listorder')->textInput()?>
-
     <?= $form->field($model, 'display')->radioList(['1' => '显示','0' => '隐藏']) ?>
 
     <div class="form-group">
