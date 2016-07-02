@@ -5,7 +5,7 @@ namespace backend\modules\rule\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\rule\models\RuleModel;
+use common\models\RuleModel;
 
 /**
  * RuleSearchModel represents the model behind the search form about `backend\modules\rule\models\RuleModel`.

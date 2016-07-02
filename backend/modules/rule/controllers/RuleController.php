@@ -5,14 +5,14 @@ namespace backend\modules\rule\controllers;
 use Yii;
 use backend\modules\rule\models\RuleModel;
 use backend\modules\rule\models\RuleSearchModel;
-use yii\web\Controller;
+use common\base\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * RuleController implements the CRUD actions for RuleModel model.
  */
-class RuleController extends Controller
+class RuleController extends BackController
 {
     /**
      * @inheritdoc
