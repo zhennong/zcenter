@@ -3,7 +3,7 @@
 namespace backend\modules\rule\controllers;
 
 use Yii;
-use backend\modules\rule\models\RuleModel;
+use common\models\RuleModel;
 use backend\modules\rule\models\RuleSearchModel;
 use common\base\BackController;
 use yii\web\NotFoundHttpException;
@@ -36,7 +36,6 @@ class RuleController extends BackController
     public function actionIndex()
     {
         $searchModel = new RuleSearchModel();
-        var_dump($searchModel);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

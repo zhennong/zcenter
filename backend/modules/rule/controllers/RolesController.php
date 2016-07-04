@@ -3,7 +3,7 @@
 namespace backend\modules\rule\controllers;
 
 use Yii;
-use backend\modules\rule\models\RolesModel;
+use common\models\RolesModel;
 use backend\modules\rule\models\RolesSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
